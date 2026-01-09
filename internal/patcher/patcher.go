@@ -161,9 +161,10 @@ func (p *Patcher) Run(runner *protontricks.Runner, appID uint32, suppressOutput 
 		return fmt.Errorf("patcher not downloaded")
 	}
 
-	// Run the patcher in the game directory
+	// Run the patcher in the game directory with --silent flag for automated patching
 	return runner.LaunchInDir(appID, p.PatcherPath, p.GameDir, protontricks.LaunchOptions{
 		SuppressOutput: suppressOutput,
+		Args:           []string{"--silent"},
 	})
 }
 

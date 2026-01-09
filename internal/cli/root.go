@@ -238,7 +238,6 @@ dotnetComplete:
 
 	// Step 14: Run patcher
 	fmt.Println("🔧 Running HD patcher...")
-	fmt.Println("   Please follow the patcher instructions in the window that opens.")
 
 	// Show spinner while patcher runs (suppress Wine debug output)
 	patcherSpinner := progressbar.NewOptions(-1,

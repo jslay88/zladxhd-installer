@@ -138,7 +138,8 @@ func (r *Runner) InstallDotNetDesktop6(appID uint32, suppressOutput bool) error 
 
 // LaunchOptions configures executable launch.
 type LaunchOptions struct {
-	SuppressOutput bool // Suppress stdout/stderr (Wine debug output)
+	SuppressOutput bool     // Suppress stdout/stderr (Wine debug output)
+	Args           []string // Additional arguments to pass to the executable
 }
 
 // Launch launches an executable in a game's Wine prefix.
@@ -147,6 +148,8 @@ func (r *Runner) Launch(appID uint32, exePath string, opts LaunchOptions) error 
 		"--appid", fmt.Sprintf("%d", appID),
 		exePath,
 	}
+	// Append any additional arguments for the executable
+	args = append(args, opts.Args...)
 
 	cmd := r.buildLaunchCommand(args...)
 
@@ -180,6 +183,8 @@ func (r *Runner) LaunchInDir(appID uint32, exePath string, workDir string, opts 
 		"--appid", fmt.Sprintf("%d", appID),
 		exePath,
 	}
+	// Append any additional arguments for the executable
+	args = append(args, opts.Args...)
 
 	cmd := r.buildLaunchCommand(args...)
 
